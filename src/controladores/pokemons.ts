@@ -1,13 +1,14 @@
-const { listarPokemons, detalharPokemon } = require('utils-playground')
+import { Request, Response } from 'express';
+import { listarPokemons, detalharPokemon } from 'utils-playground';
 
-const pokemons = async (req, res) => {
+export const pokemons = async (req: Request, res: Response) => {
     const { pagina } = req.query;
     const listaPokemons = await listarPokemons(pagina ?? 1);
 
     return res.json(listaPokemons);
 }
 
-const pokemon = async (req, res) => {
+export const pokemon = async (req: Request, res: Response) => {
     const { idOuNome } = req.params;
 
     const pokemonEncontrado = await detalharPokemon(idOuNome);
@@ -15,12 +16,4 @@ const pokemon = async (req, res) => {
     const { id, name, height, weight, base_experience, forms, abilities, species } = pokemonEncontrado;
 
     return res.json({ id, name, height, weight, base_experience, forms, abilities, species })
-}
-
-
-
-
-module.exports = {
-    pokemons,
-    pokemon
 }

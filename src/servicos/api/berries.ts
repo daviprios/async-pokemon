@@ -1,6 +1,9 @@
-const { API_URL } = require('./base')
+import { API_URL } from './base'
 
-module.exports = async function RequestBerries(idOrName, pagination) {
+export async function RequestBerries(idOrName: string | number, pagination: {
+  limit: number | string
+  offset: number | string
+}) {
   const filter = [
     !!pagination.limit && `limit=${pagination.limit}`,
     !!pagination.offset && `offset=${pagination.offset}`
